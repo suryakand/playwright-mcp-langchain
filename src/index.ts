@@ -1,7 +1,6 @@
 import "dotenv/config";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
-import { ChatOpenAI } from "@langchain/openai";
 import { DynamicStructuredTool } from "@langchain/core/tools";
 import { ChatPromptTemplate, MessagesPlaceholder } from "@langchain/core/prompts";
 import { createAgent } from "langchain";
