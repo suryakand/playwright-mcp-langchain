@@ -1,9 +1,8 @@
-import "dotenv/config"; // Add this at the very first line
+import "dotenv/config";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
 import { ChatOpenAI } from "@langchain/openai";
 import { DynamicStructuredTool } from "@langchain/core/tools";
-// import { AgentExecutor, createOpenAIFunctionsAgent } from "langchain/agents";
 import { ChatPromptTemplate, MessagesPlaceholder } from "@langchain/core/prompts";
 import { createAgent } from "langchain";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
@@ -43,12 +42,6 @@ async function run() {
   });
 
   // 4. Initialize LangChain Agent
-  // const llm = new ChatOpenAI({ 
-  //   modelName: "gpt-4o", 
-  //   temperature: 0,
-  //   apiKey: process.env.OPENAI_API_KEY 
-  // });
-
   const llm = new ChatGoogleGenerativeAI({
       model: "gemini-2.5-flash",
       temperature: 0,
@@ -68,19 +61,10 @@ async function run() {
     // prompt,
   });
 
-  // const executor = new AgentExecutor({
-  //   agent,
-  //   tools: langchainTools,
-  //   verbose: true, // See the thought process
-  // });
-
   // 5. Execute Action
   const instruction = "Search Google for 'LangChain MCP' and tell me the title of the first result.";
   
   console.log(`Starting task: ${instruction}`);
-  // const response = await executor.invoke({ input: instruction });
-  // console.log("\nFinal Result:", response.output);
-
   const response = await agent.invoke({ messages: instruction });
   console.log("\nFinal Result:", response.messages);
 
