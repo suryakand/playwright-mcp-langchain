@@ -144,7 +144,7 @@ export class LLMFactory {
    * Creates an LLM instance from environment variables
    * Reads LLM_PROVIDER, LLM_MODEL, LLM_TEMPERATURE from environment
    */
-  static getLLM(): BaseChatModel {
+  static getLLMFromEnv(): BaseChatModel {
     const provider = (process.env.LLM_PROVIDER || "google-gemini") as LLMProvider;
     const model = process.env.LLM_MODEL || undefined;
     const temperature = process.env.LLM_TEMPERATURE ? parseFloat(process.env.LLM_TEMPERATURE) : 0;

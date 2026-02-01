@@ -41,7 +41,7 @@ async function run() {
   });
 
   // 4. Initialize LangChain Agent with LLM from Factory
-  const llm = LLMFactory.getLLM();
+  const llm = LLMFactory.getLLMFromEnv();
   console.log(`Using LLM Provider: ${process.env.LLM_PROVIDER || 'google-gemini'}`);
   console.log(`Using Model: ${process.env.LLM_MODEL || 'default'}`);
 

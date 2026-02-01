@@ -87,7 +87,7 @@ The `LLMFactory` class provides a clean abstraction for creating LLM instances:
 import { LLMFactory } from "./llm-factory";
 
 // Create from environment variables
-const llm = LLMFactory.createFromEnv();
+const llm = LLMFactory.getLLMFromEnv();
 
 // Or create with explicit configuration
 const llm = LLMFactory.createLLM({
