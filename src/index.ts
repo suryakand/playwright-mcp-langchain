@@ -4,7 +4,7 @@ import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js"
 import { DynamicStructuredTool } from "@langchain/core/tools";
 import { ChatPromptTemplate, MessagesPlaceholder } from "@langchain/core/prompts";
 import { createAgent } from "langchain";
-import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
+import { LLMFactory } from "./llm-factory.js";
 
 // 1. Setup MCP Client Transport
 // We run the playwright server using npx
@@ -40,13 +40,10 @@ async function run() {
     });
   });
 
-  // 4. Initialize LangChain Agent
-  const llm = new ChatGoogleGenerativeAI({
-      model: "gemini-2.5-flash",
-      temperature: 0,
-      maxRetries: 2,
-      // other params...
-  })
+  // 4. Initialize LangChain Agent with LLM from Factory
+  const llm = LLMFactory.getLLM();
+  console.log(`Using LLM Provider: ${process.env.LLM_PROVIDER || 'google-gemini'}`);
+  console.log(`Using Model: ${process.env.LLM_MODEL || 'default'}`);
 
   const prompt = ChatPromptTemplate.fromMessages([
     ["system", "You are a helpful web automation assistant. Use the browser tools to complete the user's request."],
@@ -61,7 +58,7 @@ async function run() {
   });
 
   // 5. Execute Action
-  const instruction = "Search Google for 'LangChain MCP' and tell me the title of the first result.";
+  const instruction = "Search Google for 'Neuro SAN' and tell me the title of the first result.";
   
   console.log(`Starting task: ${instruction}`);
   const response = await agent.invoke({ messages: instruction });
